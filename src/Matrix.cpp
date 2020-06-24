@@ -5,9 +5,7 @@
 #include <Matrix.h>
 
 template<typename T>
-Matrix<T>::Matrix(const T &rows, const T &cols, const T &val) {
-    this->rows = rows;
-    this->cols = cols;
+Matrix<T>::Matrix(const int &rows, const int &cols, const T &val) : rows(rows), cols(cols) {
     for (int i = 0; i < this->rows; i++) {
         std::vector<T> temp;
         for (int j = 0; j < this->cols; j++) {
@@ -62,12 +60,24 @@ Matrix<T> Matrix<T>::operator*(const Matrix<T> &m) {
     return result;
 }
 
+template<typename T>
+T &Matrix<T>::at(int i, int j) {
+    if (i >= this->getRows() || j >= this->getCols())
+        throw std::overflow_error("Out of bounds access !!!");
+    return this->data[i][j];
+}
+
 /*
  * Avoid linker error, which happen because compiler can't find the template
  * definitions because they are defined in separate cpp files.
  *
  * Declare all the expected types by the template below to avoid linker error in future.
  */
-template class Matrix<int>;
-template class Matrix<double>;
-template class Matrix<float>;
+template
+class Matrix<int>;
+
+template
+class Matrix<double>;
+
+template
+class Matrix<float>;

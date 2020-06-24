@@ -11,7 +11,7 @@
 template<typename T>
 class Matrix {
 public:
-    Matrix(const T &rows, const T &cols, const T &val);
+    Matrix(const int &rows, const int &cols, const T &val);
 
     int getCols() const;
 
@@ -33,6 +33,8 @@ public:
     }
 
     Matrix<T> operator+(const Matrix<T> &m);
+
+    T &at(int i, int j);
 
     Matrix<T> operator*(int factor);
 

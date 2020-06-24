@@ -8,8 +8,8 @@
 void MatrixTest::SetUpTestCase() {
     m1 = std::make_shared<Matrix<int>>(3, 3, 5);
     m2 = std::make_shared<Matrix<int>>(3, 3, 7);
-    std::cout << "Matrix1: "<< std::endl << *m1 << std::endl;
-    std::cout << "Matrix2: "<< std::endl << *m2 << std::endl;
+    std::cout << "Matrix1: " << std::endl << *m1 << std::endl;
+    std::cout << "Matrix2: " << std::endl << *m2 << std::endl;
 }
 
 void MatrixTest::TearDownTestCase() {
@@ -18,40 +18,52 @@ void MatrixTest::TearDownTestCase() {
 }
 
 TEST_F(MatrixTest, Matrix1) {
-    for (int i = 0; i < 3; i++)
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < m1->getRows(); i++)
+        for (int j = 0; j < m1->getRows(); j++) {
             EXPECT_EQ(m1->at(i, j), 5);
         }
 }
 
 TEST_F(MatrixTest, Matrix2) {
-    for (int i = 0; i < 3; i++)
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < m2->getRows(); i++)
+        for (int j = 0; j < m2->getRows(); j++) {
             EXPECT_EQ(m2->at(i, j), 7);
         }
 }
 
 TEST_F(MatrixTest, Addition) {
     std::shared_ptr<Matrix<int>> result = std::make_shared<Matrix<int>>(*m1 + *m2);
-    for (int i = 0; i < 3; i++)
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < result->getRows(); i++)
+        for (int j = 0; j < result->getRows(); j++) {
             EXPECT_EQ(result->at(i, j), 12);
         }
 }
 
 TEST_F(MatrixTest, ScalarProduct) {
     std::shared_ptr<Matrix<int>> result = std::make_shared<Matrix<int>>(*m1 * 6);
-    for (int i = 0; i < 3; i++)
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < result->getRows(); i++)
+        for (int j = 0; j < result->getRows(); j++) {
             EXPECT_EQ(result->at(i, j), 30);
         }
 }
 
 TEST_F(MatrixTest, Multiplication) {
     std::shared_ptr<Matrix<int>> result = std::make_shared<Matrix<int>>(*m1 * *m2);
-    for (int i = 0; i < 3; i++)
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < result->getRows(); i++)
+        for (int j = 0; j < result->getRows(); j++) {
             EXPECT_EQ(result->at(i, j), 105);
+        }
+}
+
+TEST_F(MatrixTest, VectorMultiplication) {
+    std::shared_ptr<Vector<int>> v1 = std::make_shared<Vector<int>>(3, 0);
+    v1->at(0) = 1;
+    v1->at(1) = 2;
+    v1->at(2) = 3;
+    std::shared_ptr<Matrix<int>> result = std::make_shared<Matrix<int>>(*m1 * *v1);
+    for (int i = 0; i < result->getRows(); i++)
+        for (int j = 0; j < result->getCols(); j++) {
+            EXPECT_EQ(result->at(i, j), 30);
         }
 }
 

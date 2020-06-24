@@ -36,7 +36,7 @@ public:
 
     T &at(int i, int j);
 
-    Matrix<T> operator*(int factor);
+    Matrix<T> operator*(double factor);
 
     Matrix<T> operator*(const Matrix<T> &m);
 

@@ -29,7 +29,7 @@ Vector<T> Vector<T>::operator+(const Vector<T> &v) {
 }
 
 template<typename T>
-Vector<T> Vector<T>::operator*(int factor) {
+Vector<T> Vector<T>::operator*(double factor) {
     Vector<T> result = Vector<T>(0, 0, 0);
     result.x = this->x * factor;
     result.y = this->y * factor;
@@ -50,7 +50,7 @@ template<typename T>
 Vector<T> Vector<T>::cross(const Vector<T> &v) const {
     Vector<T> result = Vector<T>(0, 0, 0);
     result.x = this->y * v.z - v.y * this->z;
-    result.y = -1 * (this->x * v.z - v.x * this->z);
+    result.y = v.x * this->z - this->x * v.z;
     result.z = this->x * v.y - v.x * this->y;
     return result;
 }

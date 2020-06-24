@@ -37,7 +37,7 @@ Matrix<T> Matrix<T>::operator+(const Matrix<T> &m) {
 }
 
 template<typename T>
-Matrix<T> Matrix<T>::operator*(int factor) {
+Matrix<T> Matrix<T>::operator*(double factor) {
     Matrix<T> result = Matrix(this->rows, this->cols, 0);
     for (int i = 0; i < this->rows; i++)
         for (int j = 0; j < this->cols; j++)
@@ -73,11 +73,6 @@ T &Matrix<T>::at(int i, int j) {
  *
  * Declare all the expected types by the template below to avoid linker error in future.
  */
-template
-class Matrix<int>;
-
-template
-class Matrix<double>;
-
-template
-class Matrix<float>;
+template class Matrix<int>;
+template class Matrix<double>;
+template class Matrix<float>;

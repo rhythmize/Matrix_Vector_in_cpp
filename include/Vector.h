@@ -34,7 +34,7 @@ public:
 
     Vector<T> operator+(const Vector<T> &v);
 
-    Vector<T> operator*(int factor);
+    Vector<T> operator*(double factor);
 
     double dot(const Vector<T> &v) const;
 

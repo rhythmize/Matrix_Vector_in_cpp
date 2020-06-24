@@ -24,7 +24,9 @@ public:
      * compiler can't find the declaration for templated type
      */
     friend std::ostream &operator<< (std::ostream &output, const Vector<T> &v) {
-        output << v.x << "i + " << v.y << "j + " << v.z << "k" << std::endl;
+        output << v.x << "i";
+        output << ((v.y >= 0) ? " + " : " - ") << abs(v.y) << "j";
+        output << ((v.z >= 0) ? " + " : " - ") << abs(v.z) << "k" << std::endl;
         output << "Magnitude: " << v.getMagnitude() << std::endl;
         output << "Direction Cosines: < ";
         for (auto &val: v.getCosines())

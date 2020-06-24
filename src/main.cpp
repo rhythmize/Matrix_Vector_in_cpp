@@ -42,7 +42,7 @@ void testVector() {
 }
 
 int main() {
-//    testMatrix();
+    testMatrix();
     testVector();
     return 0;
 }

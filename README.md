@@ -18,3 +18,12 @@ Clean commands:
 
     make clean
     
+Run main:
+
+    cd bin
+    ./run_main
+    
+Run tests:
+    
+    cd bin
+    ./run_tests

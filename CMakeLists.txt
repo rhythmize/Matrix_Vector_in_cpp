@@ -24,7 +24,7 @@ list(REMOVE_ITEM source_files "${PROJECT_SOURCE_DIR}/src/main.cpp")
 add_library(${PROJECT_NAME} STATIC ${source_files})
 set_target_properties(${PROJECT_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-#add_executable(${PROJECT_NAME}_TEST ${PROJECT_SOURCE_DIR}/src/main.cpp)
-#target_link_libraries(${PROJECT_NAME}_TEST ${PROJECT_NAME})
+add_executable(run_main ${PROJECT_SOURCE_DIR}/src/main.cpp)
+target_link_libraries(run_main ${PROJECT_NAME})
 
 add_subdirectory(test)

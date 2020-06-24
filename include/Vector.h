@@ -11,11 +11,11 @@
 template<typename T>
 class Vector {
 public:
-    Vector(const T &x, const T &y) : Vector(x, y, 0) {};
-
-    Vector(const T &x, const T &y, const T &z) : x(x), y(y),z(z) {};
+    Vector(int size, const T &val);
 
     double getMagnitude() const;
+
+    int getSize() const;
 
     std::vector<double> getCosines() const;
 
@@ -23,15 +23,22 @@ public:
      * Define overloaded friend function in here, because if defined in cpp file
      * compiler can't find the declaration for templated type
      */
-    friend std::ostream &operator<< (std::ostream &output, const Vector<T> &v) {
-        output << v.x << "i";
-        output << ((v.y >= 0) ? " + " : " - ") << abs(v.y) << "j";
-        output << ((v.z >= 0) ? " + " : " - ") << abs(v.z) << "k" << std::endl;
-        output << "Magnitude: " << v.getMagnitude() << std::endl;
-        output << "Direction Cosines: < ";
-        for (auto &val: v.getCosines())
-            output << val << " ";
+    friend std::ostream &operator<<(std::ostream &output, const Vector<T> &v) {
+        output << "< ";
+        for (int i = 0; i < v.data.size(); i++) {
+            output << v.data[i] << " ";
+        }
         output << ">" << std::endl;
+//        output << v.x << "i";
+//        output << ((v.y >= 0) ? " + " : " - ") << abs(v.y) << "j";
+//        output << ((v.z >= 0) ? " + " : " - ") << abs(v.z) << "k" << std::endl;
+        output << "Magnitude: " << v.getMagnitude() << std::endl;
+        if (v.data.size() < 4) {
+            output << "Direction Cosines: < ";
+            for (auto &val: v.getCosines())
+                output << val << " ";
+            output << ">" << std::endl;
+        }
         return output;
     };
 
@@ -43,8 +50,10 @@ public:
 
     Vector<T> cross(const Vector<T> &v) const;
 
+    T &at(int i);
+
 private:
-    T x, y, z;
+    std::vector<T> data;
 };
 
 #endif //MATRIX_AND_VECTOR_VECTOR_H

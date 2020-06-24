@@ -24,18 +24,25 @@ void testMatrix() {
 
 void testVector() {
     std::cout << "Test Vector\n========================================================" << std::endl;
-    std::shared_ptr<Vector<int>> v1 = std::make_shared<Vector<int>>(1, 2, 3);
+    std::shared_ptr<Vector<int>> v1 = std::make_shared<Vector<int>>(3, 0);
+    v1->at(0) = 1;
+    v1->at(1) = 2;
+    v1->at(2) = 3;
     std::cout << "Vector1: " << *v1 << std::endl;
-    std::shared_ptr<Vector<int>> v2 = std::make_shared<Vector<int>>(8, 9, 15);
+    std::shared_ptr<Vector<int>> v2 = std::make_shared<Vector<int>>(3, 0);
+    v2->at(0) = 8;
+    v2->at(1) = 9;
+    v2->at(2) = 15;
     std::cout << "Vector2: " << *v2 << std::endl;
     std::cout << "Sum: " << *v1 + *v2 << std::endl;
     std::cout << "Scalar Product: " << *v1 * 6 << std::endl;
-    std::cout << "Cross Product: " << v1->cross(*v2) << std::endl;
+    if (v1->getSize() < 4)
+        std::cout << "Cross Product: " << v1->cross(*v2) << std::endl;
     std::cout << "Dot Product: " << v1->dot(*v2) << std::endl;
 }
 
 int main() {
-    testMatrix();
+//    testMatrix();
     testVector();
     return 0;
 }

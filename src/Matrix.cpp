@@ -60,6 +60,27 @@ Matrix<T> Matrix<T>::operator*(const Matrix<T> &m) {
 }
 
 template<typename T>
+Matrix<T> Matrix<T>::operator*(const Vector<T> &v) {
+    if (this->cols != v.getSize() && this->rows != v.getSize())
+        throw std::range_error("Dimensions mismatch for matrix multiplication !!!");
+
+    std::shared_ptr<Matrix<T>> m;
+    if (this->cols == v.getSize()) {
+        // create column matrix
+        m = std::make_shared<Matrix<T>>(v.getSize(), 1, 0);
+        for(int i=0; i<v.getSize(); i++)
+            m->data[i][0] = v.data[i];
+        return *this * *m;
+    } else {
+        // create row matrix
+        m = std::make_shared<Matrix<T>>(1, v.getSize(), 0);
+        for(int i=0; i<v.getSize(); i++)
+            m->data[0][i] = v.data[i];
+        return *m * *this;
+    }
+}
+
+template<typename T>
 T &Matrix<T>::at(int i, int j) {
     if (i >= this->getRows() || j >= this->getCols())
         throw std::overflow_error("Out of bounds access !!!");
@@ -72,6 +93,11 @@ T &Matrix<T>::at(int i, int j) {
  *
  * Declare all the expected types by the template below to avoid linker error in future.
  */
-template class Matrix<int>;
-template class Matrix<double>;
-template class Matrix<float>;
+template
+class Matrix<int>;
+
+template
+class Matrix<double>;
+
+template
+class Matrix<float>;

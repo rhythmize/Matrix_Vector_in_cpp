@@ -15,11 +15,15 @@ void testMatrix() {
     std::cout << "Sum: " << std::endl << *m1 + *m2 << std::endl;
     std::cout << "Scalar Product: " << std::endl << *m1 * 6 << std::endl;
     std::cout << "Matrix Product: " << std::endl << *m1 * *m2 << std::endl;
+    std::shared_ptr<Vector<int>> v1 = std::make_shared<Vector<int>>(3, 0);
+    v1->at(0) = 1;
+    v1->at(1) = 2;
+    v1->at(2) = 3;
+    std::cout << "Vector Product: " << std::endl << *m1 * *v1 << std::endl;
     m1->at(0, 0) = 8;
     m1->at(1, 1) = 18;
     m1->at(2, 2) = 28;
     std::cout << "Update Matrix1: " << std::endl << *m1;
-    std::vector<int> v(5, 1);
 }
 
 void testVector() {
@@ -43,6 +47,6 @@ void testVector() {
 
 int main() {
     testMatrix();
-    testVector();
+//    testVector();
     return 0;
 }

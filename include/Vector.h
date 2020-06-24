@@ -8,6 +8,11 @@
 #include <iostream>
 #include <vector>
 
+// forward declare the Vector, as Matrix is a friend class of Vector
+template<typename T>
+class Matrix;
+
+
 template<typename T>
 class Vector {
 public:
@@ -54,6 +59,7 @@ public:
 
 private:
     std::vector<T> data;
+    friend class Matrix<T>;
 };
 
 #endif //MATRIX_AND_VECTOR_VECTOR_H

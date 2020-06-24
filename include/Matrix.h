@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <Vector.h>
 
 template<typename T>
 class Matrix {
@@ -40,6 +41,8 @@ public:
     Matrix<T> operator*(double factor);
 
     Matrix<T> operator*(const Matrix<T> &m);
+
+    Matrix<T> operator*(const Vector<T> &v);
 
 private:
     int rows, cols;

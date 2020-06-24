@@ -8,13 +8,13 @@
 
 void testMatrix() {
     std::cout << "Test Matrix\n========================================================" << std::endl;
-    std::shared_ptr<Matrix> m1 = std::make_shared<Matrix>(3, 3, 5);
-    std::cout << "Matrix1: " << *m1 << std::endl;
-    std::shared_ptr<Matrix> m2 = std::make_shared<Matrix>(3, 3, 7);
-    std::cout << "Matrix2: " << *m2 << std::endl;
-    std::cout << "Sum: " << *m1 + *m2 << std::endl;
-    std::cout << "Scalar Product: " << *m1 * 6 << std::endl;
-    std::cout << "Matrix Product: " << *m1 * *m2 << std::endl;
+    std::shared_ptr<Matrix<int>> m1 = std::make_shared<Matrix<int>>(3, 3, 5);
+    std::cout << "Matrix1: " << std::endl << *m1 << std::endl;
+    std::shared_ptr<Matrix<int>> m2 = std::make_shared<Matrix<int>>(3, 3, 7);
+    std::cout << "Matrix2: " << std::endl << *m2 << std::endl;
+    std::cout << "Sum: " << std::endl << *m1 + *m2 << std::endl;
+    std::cout << "Scalar Product: " << std::endl << *m1 * 6 << std::endl;
+    std::cout << "Matrix Product: " << std::endl << *m1 * *m2 << std::endl;
 }
 
 void testVector() {

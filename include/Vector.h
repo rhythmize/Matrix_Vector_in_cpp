@@ -7,28 +7,41 @@
 
 #include <vector>
 
+template<typename T>
 class Vector {
 public:
-    Vector(int x, int y);
+    Vector(const T &x, const T &y) : Vector(x, y, 0) {};
 
-    Vector(int x, int y, int z);
+    Vector(const T &x, const T &y, const T &z) : x(x), y(y),z(z) {};
 
     double getMagnitude() const;
 
     std::vector<double> getCosines() const;
 
-    friend std::ostream &operator<<(std::ostream &output, const Vector &v);
+    /*
+     * Define overloaded friend function in here, because if defined in cpp file
+     * compiler can't find the declaration for templated type
+     */
+    friend std::ostream &operator<< (std::ostream &output, const Vector<T> &v) {
+        output << v.x << "i + " << v.y << "j + " << v.z << "k" << std::endl;
+        output << "Magnitude: " << v.getMagnitude() << std::endl;
+        output << "Direction Cosines: < ";
+        for (auto &val: v.getCosines())
+            output << val << " ";
+        output << ">" << std::endl;
+        return output;
+    };
 
-    Vector operator+(const Vector &v);
+    Vector<T> operator+(const Vector<T> &v);
 
-    Vector operator*(int factor);
+    Vector<T> operator*(int factor);
 
-    double dot(const Vector &v) const;
+    double dot(const Vector<T> &v) const;
 
-    Vector cross(const Vector &v) const;
+    Vector<T> cross(const Vector<T> &v) const;
 
 private:
-    int x, y, z;
+    T x, y, z;
 };
 
 #endif //MATRIX_AND_VECTOR_VECTOR_H

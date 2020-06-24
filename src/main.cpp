@@ -47,6 +47,6 @@ void testVector() {
 
 int main() {
     testMatrix();
-//    testVector();
+    testVector();
     return 0;
 }

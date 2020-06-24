@@ -1,8 +1,9 @@
 //
 // Created by rhythm on 24/06/20.
 //
-#include <Vector.h>
 #include <cmath>
+#include <Vector.h>
+#include <Matrix.h>
 
 template<typename T>
 Vector<T>::Vector(int size, const T &val) {
@@ -59,6 +60,11 @@ Vector<T> Vector<T>::operator*(double factor) {
 }
 
 template<typename T>
+Matrix<T> Vector<T>::operator*(Matrix<T> &m) {
+    return m * *this;
+}
+
+template<typename T>
 double Vector<T>::dot(const Vector<T> &v) const {
     if (this->getSize() != v.data.size())
         throw std::range_error("Dimensions mismatch for vector dot product !!!");
@@ -105,11 +111,6 @@ T &Vector<T>::at(int i) {
  *
  * Declare all the expected types by the template below to avoid linker error in future.
  */
-template
-class Vector<int>;
-
-template
-class Vector<double>;
-
-template
-class Vector<float>;
+template class Vector<int>;
+template class Vector<double>;
+template class Vector<float>;

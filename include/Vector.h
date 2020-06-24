@@ -34,9 +34,6 @@ public:
             output << v.data[i] << " ";
         }
         output << ">" << std::endl;
-//        output << v.x << "i";
-//        output << ((v.y >= 0) ? " + " : " - ") << abs(v.y) << "j";
-//        output << ((v.z >= 0) ? " + " : " - ") << abs(v.z) << "k" << std::endl;
         output << "Magnitude: " << v.getMagnitude() << std::endl;
         if (v.data.size() < 4) {
             output << "Direction Cosines: < ";
@@ -50,6 +47,8 @@ public:
     Vector<T> operator+(const Vector<T> &v);
 
     Vector<T> operator*(double factor);
+
+    Matrix<T> operator*(Matrix<T> &m);
 
     double dot(const Vector<T> &v) const;
 

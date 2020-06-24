@@ -93,11 +93,6 @@ T &Matrix<T>::at(int i, int j) {
  *
  * Declare all the expected types by the template below to avoid linker error in future.
  */
-template
-class Matrix<int>;
-
-template
-class Matrix<double>;
-
-template
-class Matrix<float>;
+template class Matrix<int>;
+template class Matrix<double>;
+template class Matrix<float>;

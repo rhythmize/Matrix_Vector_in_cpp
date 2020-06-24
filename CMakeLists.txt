@@ -26,3 +26,5 @@ set_target_properties(${PROJECT_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 add_executable(${PROJECT_NAME}_TEST ${PROJECT_SOURCE_DIR}/src/main.cpp)
 target_link_libraries(${PROJECT_NAME}_TEST ${PROJECT_NAME})
+
+add_subdirectory(test)

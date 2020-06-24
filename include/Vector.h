@@ -5,6 +5,7 @@
 #ifndef MATRIX_AND_VECTOR_VECTOR_H
 #define MATRIX_AND_VECTOR_VECTOR_H
 
+#include <iostream>
 #include <vector>
 
 template<typename T>

@@ -5,6 +5,7 @@
 #ifndef MATRIX_AND_VECTOR_MATRIX_H
 #define MATRIX_AND_VECTOR_MATRIX_H
 
+#include <iostream>
 #include <vector>
 #include <memory>
 

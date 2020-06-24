@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(matrix_and_vector)
+project(Matrix_And_Vector)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -18,4 +18,11 @@ set(CMAKE_MODULE_LINKER_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -fsa
 
 include_directories("${PROJECT_SOURCE_DIR}/include/")
 
-add_executable(matrix_and_vector src/main.cpp src/Matrix.cpp src/Vector.cpp)
+file(GLOB_RECURSE source_files "${PROJECT_SOURCE_DIR}/src/*.cpp")
+list(REMOVE_ITEM source_files "${PROJECT_SOURCE_DIR}/src/main.cpp")
+
+add_library(${PROJECT_NAME} STATIC ${source_files})
+set_target_properties(${PROJECT_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+add_executable(${PROJECT_NAME}_TEST ${PROJECT_SOURCE_DIR}/src/main.cpp)
+target_link_libraries(${PROJECT_NAME}_TEST ${PROJECT_NAME})

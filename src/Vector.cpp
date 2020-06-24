@@ -1,7 +1,6 @@
 //
 // Created by rhythm on 24/06/20.
 //
-#include <iostream>
 #include <Vector.h>
 #include <cmath>
 

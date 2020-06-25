@@ -16,7 +16,9 @@ class Matrix;
 template<typename T>
 class Vector {
 public:
-    Vector(int size, const T &val);
+    Vector(int size, T val);
+
+    Vector(int size, const T *data);
 
     double getMagnitude() const;
 

@@ -6,9 +6,15 @@
 #include <Matrix.h>
 
 template<typename T>
-Vector<T>::Vector(int size, const T &val) {
+Vector<T>::Vector(int size, T val) {
     for (int i = 0; i < size; i++)
         this->data.emplace_back(val);
+}
+
+template<typename T>
+Vector<T>::Vector(int size, const T *data) {
+    for (int i = 0; i < size; i++)
+        this->data.emplace_back(data[i]);
 }
 
 template<typename T>
@@ -45,7 +51,7 @@ Vector<T> Vector<T>::operator+(const Vector<T> &v) {
     if (this->getSize() != v.data.size())
         throw std::range_error("Dimensions mismatch for vector addition !!!");
 
-    Vector<T> result = Vector<T>(this->getSize(), 0);
+    Vector<T> result = Vector<T>(this->getSize(), 1);
     for (int i = 0; i < this->getSize(); i++)
         result.data[i] = this->data[i] + v.data[i];
     return result;
@@ -53,7 +59,7 @@ Vector<T> Vector<T>::operator+(const Vector<T> &v) {
 
 template<typename T>
 Vector<T> Vector<T>::operator*(double factor) {
-    Vector<T> result = Vector<T>(this->getSize(), 0);
+    Vector<T> result = Vector<T>(this->getSize(), 1);
     for (int i = 0; i < this->getSize(); i++)
         result.data[i] = this->data[i] * factor;
     return result;
@@ -83,7 +89,7 @@ Vector<T> Vector<T>::cross(const Vector<T> &v) const {
     if (this->getSize() != v.data.size())
         throw std::range_error("Dimensions mismatch for vector cross product !!!");
 
-    Vector<T> result = Vector<T>(3, 0);
+    Vector<T> result = Vector<T>(3, 1);
     // created 3d vector from both of existing vectors and then compute cross product
     std::vector<T> vec1(this->data);
     std::vector<T> vec2(v.data);

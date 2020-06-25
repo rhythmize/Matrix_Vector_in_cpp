@@ -7,6 +7,7 @@
 #include <memory>
 
 void testMatrix() {
+    int data3[] = {1,2,3};
     std::cout << "Test Matrix\n========================================================" << std::endl;
     std::shared_ptr<Matrix<int>> m1 = std::make_shared<Matrix<int>>(3, 3, 5);
     std::cout << "Matrix1: " << std::endl << *m1 << std::endl;
@@ -15,10 +16,7 @@ void testMatrix() {
     std::cout << "Sum: " << std::endl << *m1 + *m2 << std::endl;
     std::cout << "Scalar Product: " << std::endl << *m1 * 6 << std::endl;
     std::cout << "Matrix Product: " << std::endl << *m1 * *m2 << std::endl;
-    std::shared_ptr<Vector<int>> v1 = std::make_shared<Vector<int>>(3, 0);
-    v1->at(0) = 1;
-    v1->at(1) = 2;
-    v1->at(2) = 3;
+    std::shared_ptr<Vector<int>> v1 = std::make_shared<Vector<int>>(3, data3);
     std::cout << "Vector Product: " << std::endl << *m1 * *v1 << std::endl;
     m1->at(0, 0) = 8;
     m1->at(1, 1) = 18;
@@ -27,16 +25,12 @@ void testMatrix() {
 }
 
 void testVector() {
+    int data1[] = {1, 2, 3};
+    int data2[] = {8, 9, 15};
     std::cout << "Test Vector\n========================================================" << std::endl;
-    std::shared_ptr<Vector<int>> v1 = std::make_shared<Vector<int>>(3, 0);
-    v1->at(0) = 1;
-    v1->at(1) = 2;
-    v1->at(2) = 3;
+    std::shared_ptr<Vector<int>> v1 = std::make_shared<Vector<int>>(3, data1);
     std::cout << "Vector1: " << *v1 << std::endl;
-    std::shared_ptr<Vector<int>> v2 = std::make_shared<Vector<int>>(3, 0);
-    v2->at(0) = 8;
-    v2->at(1) = 9;
-    v2->at(2) = 15;
+    std::shared_ptr<Vector<int>> v2 = std::make_shared<Vector<int>>(3, data2);
     std::cout << "Vector2: " << *v2 << std::endl;
     std::cout << "Sum: " << *v1 + *v2 << std::endl;
     std::cout << "Scalar Product: " << *v1 * 6 << std::endl;

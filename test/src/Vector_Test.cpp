@@ -6,14 +6,11 @@
 #include <Vector_Test.h>
 
 void VectorTest::SetUpTestCase() {
-    v1 = std::make_shared<Vector<int>>(3, 0);
-    v1->at(0) = 1;
-    v1->at(1) = 2;
-    v1->at(2) = 3;
-    v2 = std::make_shared<Vector<int>>(3, 0);
-    v2->at(0) = 8;
-    v2->at(1) = 9;
-    v2->at(2) = 15;
+    int data1[] = {1, 2, 3};
+    int data2[] = {8, 9, 15};
+
+    v1 = std::make_shared<Vector<int>>(3, data1);
+    v2 = std::make_shared<Vector<int>>(3, data2);
     std::cout << "Vector1: "<< *v1 << std::endl;
     std::cout << "Vector2: "<< *v2 << std::endl;
 }

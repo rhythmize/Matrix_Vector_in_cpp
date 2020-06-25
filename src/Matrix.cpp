@@ -4,7 +4,7 @@
 #include <Matrix.h>
 
 template<typename T>
-Matrix<T>::Matrix(const int &rows, const int &cols, const T &val) : rows(rows), cols(cols) {
+Matrix<T>::Matrix(const int &rows, const int &cols, T val) : rows(rows), cols(cols) {
     for (int i = 0; i < this->rows; i++) {
         std::vector<T> temp;
         for (int j = 0; j < this->cols; j++) {
@@ -12,6 +12,16 @@ Matrix<T>::Matrix(const int &rows, const int &cols, const T &val) : rows(rows), 
         }
         this->data.emplace_back(temp);
     }
+}
+
+template<typename T>
+Matrix<T>::Matrix(const std::vector<std::vector<T>> &data) : rows(data.size()), cols(data[0].size()) {
+    int len = data[0].size();
+    for (int i = 0; i < data.size(); i++)
+        if (data[i].size() != len)
+            throw std::range_error("Data size varying per row. Can't create matrix !!!");
+
+    this->data.insert(this->data.end(), data.begin(), data.end());
 }
 
 template<typename T>
@@ -28,7 +38,7 @@ template<typename T>
 Matrix<T> Matrix<T>::operator+(const Matrix<T> &m) {
     if (this->rows != m.getRows() || this->cols != m.getCols())
         throw std::range_error("Dimensions mismatch for matrix addition !!!");
-    Matrix<T> result = Matrix(this->rows, this->cols, 0);
+    Matrix<T> result = Matrix(this->rows, this->cols, 1);
     for (int i = 0; i < this->rows; i++)
         for (int j = 0; j < this->cols; j++)
             result.data[i][j] = this->data[i][j] + m.data[i][j];
@@ -37,7 +47,7 @@ Matrix<T> Matrix<T>::operator+(const Matrix<T> &m) {
 
 template<typename T>
 Matrix<T> Matrix<T>::operator*(double factor) {
-    Matrix<T> result = Matrix(this->rows, this->cols, 0);
+    Matrix<T> result = Matrix(this->rows, this->cols, 1);
     for (int i = 0; i < this->rows; i++)
         for (int j = 0; j < this->cols; j++)
             result.data[i][j] = factor * this->data[i][j];
@@ -48,7 +58,7 @@ template<typename T>
 Matrix<T> Matrix<T>::operator*(const Matrix<T> &m) {
     if (this->cols != m.getRows())
         throw std::range_error("Dimensions mismatch for matrix multiplication !!!");
-    Matrix<T> result = Matrix(this->rows, m.getCols(), 0);
+    Matrix<T> result = Matrix(this->rows, m.getCols(), 1);
     for (int i = 0; i < this->rows; i++)
         for (int j = 0; j < m.getCols(); j++) {
             T temp = 0;
@@ -67,14 +77,14 @@ Matrix<T> Matrix<T>::operator*(const Vector<T> &v) {
     std::shared_ptr<Matrix<T>> m;
     if (this->cols == v.getSize()) {
         // create column matrix
-        m = std::make_shared<Matrix<T>>(v.getSize(), 1, 0);
-        for(int i=0; i<v.getSize(); i++)
+        m = std::make_shared<Matrix<T>>(v.getSize(), 1, 1);
+        for (int i = 0; i < v.getSize(); i++)
             m->data[i][0] = v.data[i];
         return *this * *m;
     } else {
         // create row matrix
         m = std::make_shared<Matrix<T>>(1, v.getSize(), 0);
-        for(int i=0; i<v.getSize(); i++)
+        for (int i = 0; i < v.getSize(); i++)
             m->data[0][i] = v.data[i];
         return *m * *this;
     }

@@ -13,7 +13,9 @@
 template<typename T>
 class Matrix {
 public:
-    Matrix(const int &rows, const int &cols, const T &val);
+    Matrix(const int &rows, const int &cols, T val);
+
+    Matrix(const std::vector<std::vector<T>> &data);
 
     int getCols() const;
 

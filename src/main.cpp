@@ -7,11 +7,22 @@
 #include <memory>
 
 void testMatrix() {
-    int data3[] = {1,2,3};
+    std::vector<std::vector<int>> data1, data2;
+    for (int i = 0; i < 3; i++) {
+        std::vector<int> temp1, temp2;
+        for (int j = 0; j < 3; j++) {
+            temp1.emplace_back(i+j);
+            temp2.emplace_back(i*j);
+        }
+        data1.emplace_back(temp1);
+        data2.emplace_back(temp2);
+    }
+
+    int data3[] = {1, 2, 3};
     std::cout << "Test Matrix\n========================================================" << std::endl;
-    std::shared_ptr<Matrix<int>> m1 = std::make_shared<Matrix<int>>(3, 3, 5);
+    std::shared_ptr<Matrix<int>> m1 = std::make_shared<Matrix<int>>(data1);
     std::cout << "Matrix1: " << std::endl << *m1 << std::endl;
-    std::shared_ptr<Matrix<int>> m2 = std::make_shared<Matrix<int>>(3, 3, 7);
+    std::shared_ptr<Matrix<int>> m2 = std::make_shared<Matrix<int>>(data2);
     std::cout << "Matrix2: " << std::endl << *m2 << std::endl;
     std::cout << "Sum: " << std::endl << *m1 + *m2 << std::endl;
     std::cout << "Scalar Product: " << std::endl << *m1 * 6 << std::endl;
